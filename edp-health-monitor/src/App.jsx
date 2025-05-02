@@ -5,6 +5,7 @@ import Login from "./components/Login";
 import Dashboard from "./components/Dashboard";
 import Alerts from "./components/Alerts";
 import Logs from "./components/Logs";
+import Health from "./components/Health";
 import Trends from "./components/Trends"; // Import Trends component
 import "./App.css";
 
@@ -21,6 +22,7 @@ function App() {
           <Route path="/alerts" element={<Alerts />} />
           <Route path="/logs" element={<Logs />} />
           <Route path="/trends" element={<Trends />} /> {/* Add Trends route */}
+          <Route path="/health" element={<Health />} />
         </Routes>
       </div>
     </Router>
