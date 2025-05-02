@@ -1,0 +1,80 @@
+/* General Landing Container */
+.landing-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Ensure it takes the full viewport height */
+  width: 100vw;  /* Ensure it takes the full viewport width */
+  background-color: #2c3e50; /* A solid professional color (dark blue-gray) */
+  color: white;
+  font-family: 'Arial', sans-serif;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden; /* Prevent scrolling */
+  background-attachment: fixed; /* Fix the background to prevent sliding */
+}
+
+/* Glass Effect Card */
+.glass-card {
+  background: rgba(255, 255, 255, 0.2); /* Slight white background */
+  border-radius: 12px;
+  padding: 30px 50px;
+  width: 100%;
+  max-width: 500px; /* Adjust size of the card */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(8px); /* Glass effect */
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  animation: fadeIn 1s ease-out;
+  z-index: 1; /* Ensure card stays on top */
+}
+
+/* Heading Style */
+.glass-card h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: #f39c12; /* Gold accent color */
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Paragraph Style */
+.glass-card p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  color: #ecf0f1; /* Light gray text */
+  line-height: 1.6;
+}
+
+/* Button Style */
+.login-button {
+  background-color: #3498db; /* Blue color */
+  border: none;
+  color: white;
+  padding: 12px 25px;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  width: 100%;
+}
+
+.login-button:hover {
+  background-color: #2980b9; /* Darker blue on hover */
+  transform: translateY(-5px); /* Slight lift effect */
+}
+
+/* FadeIn Animation */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

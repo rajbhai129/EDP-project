@@ -1,0 +1,42 @@
+.alerts-container {
+  padding: 2rem;
+  text-align: center;
+  background-color: #f9f9f9;
+  min-height: 100vh;
+}
+
+.alerts-container h1 {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 1.5rem;
+}
+
+.alerts-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.alert-card {
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  font-size: 1.2rem;
+  color: white;
+}
+
+.alert-card.critical {
+  background-color: #ff4d4d;
+}
+
+.alert-card.warning {
+  background-color: #ffa500;
+}
+
+.alert-card.info {
+  background-color: #4caf50;
+}
+
+.alert-card p {
+  margin: 0;
+}

@@ -1,0 +1,96 @@
+/* General container */
+.dashboard-container {
+  padding: 3rem;
+  text-align: center;
+  background: linear-gradient(to bottom right, #2c3e50, #4ca1af); /* Dark blue gradient */
+  color: white;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 1s ease-in-out;
+}
+
+/* Heading */
+.dashboard-container h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  animation: bounceIn 2s ease-in-out;
+  color: #f39c12; /* Gold color for heading */
+}
+
+/* Vitals container */
+.vitals-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  width: 100%;
+  max-width: 1000px;
+  margin-top: 1rem;
+}
+
+/* Vital Card */
+.vital-card {
+  background: rgba(0, 0, 0, 0.6); /* Slightly darker black background */
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease, background 0.3s ease;
+  color: #ecf0f1; /* Light gray text color */
+}
+
+.vital-card:hover {
+  background: rgba(0, 0, 0, 0.8); /* Darker on hover */
+  transform: translateY(-10px);
+}
+
+.vital-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #3498db; /* Blue color for labels */
+}
+
+.vital-value {
+  font-size: 1.4rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+  color: #ecf0f1; /* Light gray value color */
+  transition: color 0.3s ease;
+}
+
+.vital-card:hover .vital-value {
+  color: #f39c12; /* Gold color on hover */
+}
+
+/* Fade In animation */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Bounce In animation for Heading */
+@keyframes bounceIn {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

@@ -1,0 +1,43 @@
+/* Bottom Navbar Styling */
+.bottom-navbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  background-color: #2c3e50; /* Dark background */
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}
+
+.navbar-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: #bdc3c7; /* Light gray color */
+  font-size: 0.9rem;
+  transition: color 0.3s ease;
+}
+
+.navbar-icon svg {
+  font-size: 1.5rem; /* Icon size */
+  margin-bottom: 4px;
+}
+
+.navbar-icon.active {
+  color: #f39c12; /* Highlight color for active link */
+}
+
+.navbar-icon:hover {
+  color: #f39c12; /* Highlight color on hover */
+}
+
+/* Prevent content from overlapping the navbar */
+body {
+  padding-bottom: 60px; /* Same height as the navbar */
+}
