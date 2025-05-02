@@ -13,6 +13,7 @@ function App() {
     <Router>
       <Navbar />
       <div className="content-container">
+        
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/login" element={<Login />} />
