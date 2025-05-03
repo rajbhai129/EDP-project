@@ -30,7 +30,7 @@ function Trends() {
     const pulse = filtered.map((entry) => entry.pulse);
     const spo2 = filtered.map((entry) => entry.spo2);
     const temp = filtered.map((entry) => entry.temp);
-
+  
     setDailyChartData({
       labels,
       datasets: [
@@ -63,12 +63,16 @@ function Trends() {
         },
       ],
     });
-
+  
     // Analyze daily trends
     const analysis = analyzeDailyTrends(filtered);
     setTrendAnalysis(analysis);
+  
+    // Save trend analysis to localStorage
+    localStorage.setItem("trendAnalysis", JSON.stringify(analysis));
+  
     setSuggestions(generateSuggestions(analysis, filtered));
-  }, [selectedDate]); // Only re-run when selectedDate changes
+  }, [selectedDate]);
 
   // 10-Day Chart Data
   useEffect(() => {
@@ -254,22 +258,36 @@ function getLastTenDays() {
 function generateDummyData() {
   const data = [];
   const now = new Date();
+
   for (let d = 0; d < 20; d++) {
     const date = new Date();
     date.setDate(now.getDate() - d);
     const dateStr = date.toISOString().split("T")[0];
 
-    for (let hour = 0; hour < 24; hour += 2) {
-      const timeStr = `${hour.toString().padStart(2, "0")}:00`;
+    let currentTime = new Date(date);
+    currentTime.setHours(0, 0, 0, 0); // Start at midnight
+
+    while (currentTime.getDate() === date.getDate()) {
+      // Generate random health data
+      const pulse = 65 + Math.floor(Math.random() * 30); // 65–95
+      const spo2 = 93 + Math.floor(Math.random() * 6); // 93–98
+      const temp = +(36 + Math.random() * 2).toFixed(1); // 36.0–38.0
+
+      // Add the data point
       data.push({
-        timestamp: `${dateStr} ${timeStr}`,
-        pulse: 65 + Math.floor(Math.random() * 30), // 65–95
-        spo2: 93 + Math.floor(Math.random() * 6), // 93–98
-        temp: +(36 + Math.random() * 2).toFixed(1), // 36.0–38.0
+        timestamp: currentTime.toISOString().replace("T", " ").slice(0, 16), // Format: YYYY-MM-DD HH:mm
+        pulse,
+        spo2,
+        temp,
       });
+
+      // Increment time by a random interval (1 to 2 hours)
+      const randomInterval = Math.floor(Math.random() * 60) + 60; // 60–120 minutes
+      currentTime.setMinutes(currentTime.getMinutes() + randomInterval);
     }
   }
-  return data.reverse();
+
+  return data.reverse(); // Reverse to make the data chronological
 }
 
 // Analyze Daily Trends
