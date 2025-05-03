@@ -1,5 +1,12 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Heart, Droplet, Thermometer, Clock, AlertTriangle } from "lucide-react";
+import {
+  Heart,
+  Droplet,
+  Thermometer,
+  Clock,
+  AlertTriangle,
+} from "lucide-react";
 
 function Dashboard() {
   // Retrieve data from localStorage
@@ -7,11 +14,41 @@ function Dashboard() {
 
   // If data exists in localStorage, use it, otherwise fallback to mock data
   const data = storedData || {
-    heartRate: 72,
-    spo2: 98,
-    temperature: 36.5,
-    timestamp: new Date().toLocaleString(),
+    heartRate: 0,
+    spo2: 0,
+    temperature: 0,
+    timestamp: "N/A",
   };
+
+  // Save the current health data to logs in localStorage
+  useEffect(() => {
+    if (storedData) {
+      const storedLogs = JSON.parse(localStorage.getItem("healthLogs")) || [];
+      const newLog = {
+        date: storedData.timestamp.split(", ")[0],
+        time: storedData.timestamp.split(", ")[1],
+        pulse: storedData.heartRate,
+        spo2: storedData.spo2,
+        temperature: storedData.temperature,
+      };
+
+      // Check if the new log already exists in the stored logs
+      const isDuplicate = storedLogs.some(
+        (log) =>
+          log.date === newLog.date &&
+          log.time === newLog.time &&
+          log.pulse === newLog.pulse &&
+          log.spo2 === newLog.spo2 &&
+          log.temperature === newLog.temperature
+      );
+
+      if (!isDuplicate) {
+        // Append the new log and save only the last 10 entries
+        const updatedLogs = [...storedLogs, newLog].slice(-10);
+        localStorage.setItem("healthLogs", JSON.stringify(updatedLogs));
+      }
+    }
+  }, [storedData]);
 
   // Risk level detection logic (Rule-based "ML")
   const getRiskLevel = ({ heartRate, spo2, temperature }) => {
@@ -61,11 +98,17 @@ function Dashboard() {
           {/* Heart Rate Card */}
           <div className="bg-white rounded-2xl shadow-md p-4 border border-gray-100 transition duration-300 hover:shadow-lg">
             <div className="flex items-center mb-2">
-              <Heart className={`w-5 h-5 mr-2 ${getHeartRateColor(data.heartRate)}`} />
+              <Heart
+                className={`w-5 h-5 mr-2 ${getHeartRateColor(data.heartRate)}`}
+              />
               <span className="text-gray-700 font-medium">Heart Rate</span>
             </div>
             <div className="flex items-end">
-              <span className={`text-3xl font-bold ${getHeartRateColor(data.heartRate)}`}>
+              <span
+                className={`text-3xl font-bold ${getHeartRateColor(
+                  data.heartRate
+                )}`}
+              >
                 {data.heartRate}
               </span>
               <span className="text-gray-500 ml-2 mb-1">bpm</span>
@@ -89,11 +132,17 @@ function Dashboard() {
           {/* Temperature Card */}
           <div className="bg-white rounded-2xl shadow-md p-4 border border-gray-100 transition duration-300 hover:shadow-lg">
             <div className="flex items-center mb-2">
-              <Thermometer className={`w-5 h-5 mr-2 ${getTempColor(data.temperature)}`} />
+              <Thermometer
+                className={`w-5 h-5 mr-2 ${getTempColor(data.temperature)}`}
+              />
               <span className="text-gray-700 font-medium">Temperature</span>
             </div>
             <div className="flex items-end">
-              <span className={`text-3xl font-bold ${getTempColor(data.temperature)}`}>
+              <span
+                className={`text-3xl font-bold ${getTempColor(
+                  data.temperature
+                )}`}
+              >
                 {data.temperature}
               </span>
               <span className="text-gray-500 ml-2 mb-1">°C</span>
@@ -111,7 +160,11 @@ function Dashboard() {
         </div>
 
         {/* Risk Prediction */}
-        <div className={`mt-6 flex items-center justify-center gap-2 text-lg font-semibold ${getRiskColor(riskLevel)}`}>
+        <div
+          className={`mt-6 flex items-center justify-center gap-2 text-lg font-semibold ${getRiskColor(
+            riskLevel
+          )}`}
+        >
           <AlertTriangle className="w-5 h-5" />
           Health Status: {riskLevel}
         </div>
@@ -119,7 +172,7 @@ function Dashboard() {
         {/* Link to Health Monitor page */}
         <Link to="/health">
           <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg w-full mt-6">
-            View Health Monitor
+            Health Analysis
           </button>
         </Link>
       </div>

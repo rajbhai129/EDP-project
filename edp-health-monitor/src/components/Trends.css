@@ -35,10 +35,37 @@
 
 .chart-container {
   max-width: 1000px;
-  height: 500px;
   margin: 0 auto;
   background: white;
   padding: 2.5rem;
   border-radius: 12px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Suggestions Box */
+.suggestions-box {
+  margin: 2rem auto;
+  max-width: 700px;
+  background-color: #e8f4fd;
+  border-left: 5px solid #3498db;
+  padding: 1.5rem;
+  border-radius: 8px;
+  text-align: left;
+}
+
+.suggestions-box h2 {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+  color: #2c3e50;
+}
+
+.suggestions-box ul {
+  list-style-type: disc;
+  padding-left: 1.25rem;
+  color: #2c3e50;
+}
+
+.suggestions-box li {
+  margin-bottom: 0.5rem;
+  line-height: 1.4;
 }
