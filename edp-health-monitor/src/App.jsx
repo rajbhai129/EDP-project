@@ -21,7 +21,7 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/alerts" element={<Alerts />} />
           <Route path="/logs" element={<Logs />} />
-          <Route path="/trends" element={<Trends />} /> {/* Add Trends route */}
+          <Route path="/trends" element={<Trends />} /> {/* Ensure this route is correct */}
           <Route path="/health" element={<Health />} />
         </Routes>
       </div>
